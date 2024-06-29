@@ -1,108 +1,127 @@
-import styled from 'styled-components'
+import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../utils/deviceBreakpoints"
 
-export const Container = styled.div`
-    max-width: 100%;
-    height: 100vh;
+export const Main = styled.main`
+    display: flex;
+    flex-direction: column;
 
-    display: grid;
-    grid-template-rows: 10rem auto;
-    grid-template-areas: 
-    'header'
-    'content';
-`
+    > #section-content {
+        margin-left: 24px;
+    }
 
-export const Content = styled.main`
-    grid-area: content;
-
-    overflow-y: auto;
-
-    padding-top: 5rem;
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        margin-inline: 124px;
+    
+        > #section-content {
+            margin: 0;
+        }
+    }
 `
 
 export const Banner = styled.section`
-    max-width: 120rem;
-    margin: auto;
-    padding: 2rem;
-
-    .card{
-        position: relative;
-
+    > #banner-content {
         display: flex;
-        align-items: center;
-        justify-content: end;
+        justify-content: center;
 
-        padding-right: 1rem;
-
-        width: 100%;
-        min-height: 12rem;
-         
-        background: ${({theme}) => theme.COLORS.GRADIENTS_300};
+        max-width: 1120px;
+        height: 120px;
         
-        border-radius: .8rem;
+        margin: 44px 16px 62px 36px;
 
-        .title{
-            width: 50%;
-
-            display: flex;
-            flex-direction: column;
-
-            justify-content: end;
-
-            h1 {
-                font-size: 1.8rem;
-            }
-
-            span{
-                font-size: 1.2rem;
-            }
-        }
-        
+        border-radius: 2.92px;
+        background: rgb(0,19,28);
+        background: linear-gradient(0deg, rgba(0,19,28,1) 0%, rgba(9,30,38,1) 100%);
+    
         img {
-            position: absolute;
-            left: -3rem;
-            top: -1rem;
-                
-            max-height: 13.5rem;
+            position: relative;
+            z-index: 0;
+            
+            margin-left: -30px;
+            margin-top: -30px;
+        }
 
-            object-fit: fill;
+        .desktopImage {
+            display: none;
         }
     }
 
-    @media only screen and (min-width: 1000px) {
-        .card {
-            padding-right: 3.2rem;
-            min-height: 31rem;
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        display: flex;
+        justify-content: center;
+        
+        > #banner-content {
+            width: fit-content;
+        }
+    }
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        display: flex;
+        justify-content: center;
+
+        > #banner-content {
+            position: relative;
+            justify-content: unset;
             
-            .title{
-                width: 50%;
+            width: 100%;
+            height: 100%;
+    
+            margin: 0;
+            margin-block: 164px 62px;
+    
+            text-align: end;
 
-                display: flex;
-                flex-direction: column;
-
-                justify-content: end;
-
-                h1 {
-                    font-size: 4rem;
-                }
-
-                span{
-                    font-size: 1.6rem;
-                }
-            }
-            
             img {
-                left: -10rem;
-                top: -5rem;
-                
-                max-height: 37.2rem;
+                position: absolute;
+                bottom: 0;
+    
+                margin-left: -70px;
+            }
+
+            .desktopImage {
+                display: block;
+            }
+
+            .mobileImage {
+                display: none;
             }
         }
     }
 `
 
-export const Dishes = styled.div`
-    max-width: 120rem;
+export const Text = styled.div`
+    position: absolute;
+    z-index: 1;
+
+    box-sizing: content-box;
+    width: 202px;
+
+    margin-left: -8px;
+    padding: 3.6rem 2.1rem 0 0;
+
+    > h2 {
+        font: 600 1.8rem/140% "Poppins", sans-serif;
+    }
     
-    padding: 6.4rem 3rem;
-    margin: 0 auto;
+    > p {
+        font: normal 1.2rem/140% "Poppins", sans-serif;
+    }
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.SM}) {
+        position: relative;
+    }
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        width: 100%;
+
+        margin: 0;
+        padding: 8.8rem 10rem 9.2rem 0;
+        
+        > h2 {
+            font: ${({ theme }) => theme.FONTS.POPPINS_500_MEDIUM};
+        }
+
+        > p {
+            font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
+        }
+    }
 `

@@ -1,123 +1,82 @@
-import { useState } from 'react'
-import { Link, useNavigate } from 'react-router-dom'
-import { RiEyeOffLine, RiEyeLine } from 'react-icons/ri'
+import { Input } from "../../components/Input"
+import { Button } from "../../components/Button"
 
-import { Container, Form } from './styles'
+import { Container, Title, Form, Wrapper } from "./styles.js"
+import { Link, useNavigate } from "react-router-dom"
 
-import { Button } from '../../components/Button'
-import { Input } from '../../components/Input'
+import { useState } from "react"
+import { api } from "../../services/api.js"
 
-import { api } from '../../services/api'
-
-import LogoFoodExplore from '../../assets/LogoFoodExplore.svg'
-
-export function SignUp() {
-    const [name, setName] = useState('')
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [loading, setLoading] = useState(false)
-    const [showPassword, setShowPassword] = useState(false)
-
+function Signup() {
     const navigate = useNavigate()
 
-    function handleSignUp() {
-        if (!name || !email || !password) {
-            return alert('Preencha todos os campos!')
+    const [name, setName] = useState("")
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
+
+    const handleCreateAccount = async () => {
+        const response = await api.post("/users", { name, email, password })
+            .catch(({ response: error }) => alert(error.data.message))
+
+        if(response) {
+            alert("Usuário criado com sucesso!")
+            navigate(-1)
         }
-
-        if (password.length < 6) {
-            alert('A senha deve conter pelo menos 6 caracteres')
-            return
-        }
-
-        setLoading(true)
-
-        api.post('/users', { name, email, password })
-            .then(() => {
-                alert('Usuário cadastrado com sucesso!')
-                navigate(-1)
-                setLoading(false)
-            })
-            .catch(error => {
-                if (error.response) {
-                    alert(error.response.data.message)
-                } else {
-                    alert('Não foi possível cadastrar')
-                }
-
-                setLoading(false)
-            })
-    }
-
-    function handleKeyDown(e) {
-        if (e.key === 'Enter') {
-            handleSignUp()
-        }
-    }
-
-    function handleTogglePassword() {
-        setShowPassword(!showPassword)
     }
 
     return (
         <Container>
-            <img src={LogoFoodExplore} alt='Logo do restaurante fictício Food Explore, este logo tem um losango na cor azul-escuro e ao lago escrito Food Explore na cor branca.' />
+            <div>
+                <Title>
+                    <svg width="50" height="48" viewBox="0 0 26 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 0.744263L25.9904 8.24426V23.2443L13 30.7443L0.00961876 23.2443V8.24426L13 0.744263Z" fill="#065E7C" />
+                    </svg>
 
-            <Form>
-                <fieldset>
-                    <legend>Crie sua conta</legend>
+                    <h1>food explorer</h1>
+                </Title>
 
-                    <div className='information'>
-                        <label htmlFor='name'>Nome</label>
+                <Form>
+                    <h1>Crie sua conta</h1>
 
-                        <Input
-                            id='name'
-                            type='text'
-                            placeholder='Exemplo: Tulio Gomides'
-                            onChange={e => setName(e.target.value)}
+                    <Wrapper>
+                        <label htmlFor="dish-name">Seu nome</label>
+                        <Input 
+                            id="dish-name" 
+                            type="text" 
+                            placeholder="Exemplo: Maria da Silva" 
+                            onChange={(e) => setName(e.target.value)}
                         />
-                    </div>
+                    </Wrapper>
 
-                    <div className='information'>
-                        <label htmlFor='email'>Email</label>
-
-                        <Input
-                            id='email'
-                            type='text'
-                            placeholder='exemplo@exemplo.com.br'
-                            onChange={e => setEmail(e.target.value)}
+                    <Wrapper>
+                        <label htmlFor="user-email">Email</label>
+                        <Input 
+                            id="user-email" 
+                            type="email" 
+                            placeholder="Exemplo: exemplo@exemplo.com.br" 
+                            onChange={(e) => setEmail(e.target.value)}
                         />
-                    </div>
+                    </Wrapper>
 
-                    <div className='information'>
-                        <label htmlFor='password'>Senha</label>
+                    <Wrapper>
+                        <label htmlFor="dish-password">Senha</label>
+                        <Input 
+                            id="dish-password" 
+                            type="password" 
+                            placeholder="No mínimo 6 caracteres" 
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
+                    </Wrapper>
 
-                        <div>
-                            <Input
-                                id='password'
-                                type={showPassword ? 'text' : 'password'}
-                                placeholder='No mínimo 6 caracteres'
-                                onChange={e => setPassword(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                            />
+                    <Button title="Criar conta" onClick={handleCreateAccount} isActive />
 
-                            <span onClick={handleTogglePassword}>
-                                {showPassword ? <RiEyeOffLine size={22} /> : <RiEyeLine size={22} />}
-                            </span>
-                        </div>
-                    </div>
-
-                    <Button
-                        title={loading ? 'Salvando dados' : 'Criar conta'}
-                        onClick={handleSignUp}
-                        disabled={loading}
-                    />
-                </fieldset>
-
-                <Link to='/'>
-                    Já tenho uma conta
-                </Link>
-            </Form>
+                    <Link to="/">
+                        Já tenho uma conta
+                    </Link>
+                </Form>
+            </div>
         </Container>
     )
 }
+
+export default Signup

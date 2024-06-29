@@ -1,141 +1,104 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { RiHeartFill, RiArrowRightSLine, RiEditLine } from 'react-icons/ri'
+import { HeartStraight, PencilSimple } from "@phosphor-icons/react"
+import dishImage from "../../assets/img/group.png"
 
-import { api } from '../../services/api'
-import { useAuth } from '../../hooks/auth'
+import { Stepper } from "../Stepper"
+import { Button } from "../Button"
 
-import { Container, Content, Action } from './styles'
+import { Container, Section, Actions, Dish, Buttons } from "./styles.js"
 
-import { QuantityProducts } from '../QuantityProducts'
+import { useEffect, useState } from "react"
+import { useAuth } from "../../hooks/auth.jsx"
+import { Link } from "react-router-dom"
+import { api } from "../../services/api"
 
-import NotFound from '../../assets/notFound.svg'
+export function Card({ id, image, name, desc, price }) {
+    const { user, setOrders } = useAuth()
+    const [isFavorite, setIsFavorite] = useState(false)
 
-export function Card({ data, ...rest }) {
-    const { user } = useAuth()
-    const imageURL = data.image ? `${api.defaults.baseURL}/files/${data.image}` : NotFound
+    const handlePriceFormat = (value) => {
+        const newValue = String(value).split(".")
 
-    const [favorite, setFavorite] = useState(false)
+        if(newValue.length === 2) {
+            return newValue[0] + "," + newValue[1]
+        }
 
-    function handleFavorites() {
-        api.post('/favorites', { id: data.id })
-            .then(() => {
-                setFavorite(true)
-                alert('Prato adicionado aos favoritos')
-            })
-            .catch(error => {
-                if (error.response) {
-                    alert(error.response.data.message)
-                } else {
-                    alert('Não foi adicionar produto aos favoritos')
-                }
-            })
+        return newValue[0]
     }
 
-    function handleRemoveFavorite() {
-        api.delete(`/favorites/${data.id}`)
-            .then(() => {
-                setFavorite(false)
-                alert('Prato removido dos favoritos')
-            })
-            .catch(error => {
-                if (error.response) {
-                    alert(error.response.data.message)
-                } else {
-                    alert('Não foi possível remover o prato de favoritos')
-                }
-            })
+    const addToCard = async () => {
+        const quantity = Number(document.querySelector(`#stepper-${id}`).textContent)
+
+        const newOrder = {
+            quantity,
+            user_id: user.id,
+            dish_id: id
+        }
+
+        if(quantity) {
+            await api.post(`/orders`, newOrder)
+        } else {
+            await api.delete(`/orders?user_id=${user.id}&dish_id=${id}`)
+        }
+        
+        const ordersList = await api.get(`/orders/${user.id}`)
+
+        localStorage.setItem("@orders", JSON.stringify(ordersList.data))
+        setOrders(ordersList.data)
+    }
+
+    const handleFavorite = async () => {
+        if(isFavorite) {
+            await api.delete(`/favorite/${id}`)
+            setIsFavorite(false)
+        } else {
+            setIsFavorite(true)
+            await api.post("/favorite", { user_id: user.id, dish_id: id })
+        }
     }
 
     useEffect(() => {
-        async function fetchFavorites() {
-            const response = await api.get(`/favorites/${data.id}`)
-            setFavorite(response.data)
+        const fetchFavorite = async () => {
+            const { data: response } = await api.get(`/favorite?user_id=${user.id}&dish_id=${id}`)
+
+            if(response) {
+                setIsFavorite(true)
+            }
         }
 
-        fetchFavorites()
-    }, [data.id])
+        fetchFavorite()
+    },[])
 
-    return (
-        <Container {...rest}>
-            <Content>
-                <Link to={`/details/${data.id}`}>
-                    <img src={imageURL} alt={data.title} />
-                </Link>
-
-                {
-                    user.isAdmin
-                        ?
-                        <>
-                            <Link to={`/details/${data.id}`} className='decision'>
-                                <RiEditLine className='edit' />
-                            </Link>
-
-                            <Link to={`/details/${data.id}`}>
-                                <h2>
-                                    {data.title}
-                                    <RiArrowRightSLine />
-                                </h2>
-                            </Link>
-
-                            <p>
-                                {data.description}
-                            </p>
-
-                            <span className='price'>
-                                R$ {
-                                    data.price.toLocaleString('pt-BR', {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
-                                    })}
-                            </span>
-
-                        </>
+    return(
+        <Container>
+            <Section>
+                <Actions>
+                    { user.role === 'admin' ?
+                        <Link to={`/editarprato/${id}`}>
+                            <PencilSimple />
+                        </Link>
                         :
-                        <>
-                            {
-                                favorite
-                                    ?
-                                    <RiHeartFill
-                                        size={24}
-                                        className='favorite'
-                                        onClick={handleRemoveFavorite}
-                                    />
-                                    :
-                                    <RiHeartFill
-                                        size={24}
-                                        className='addFavorite'
-                                        onClick={handleFavorites}
-                                    />
-                            }
+                        <HeartStraight
+                            onClick={handleFavorite}
+                            weight={isFavorite ? "fill" : "regular"}
+                        />
+                    }
+                </Actions>
 
-                            <Link to={`/details/${data.id}`}>
-                                <h2>
-                                    {data.title}
-                                    <RiArrowRightSLine />
-                                </h2>
-                            </Link>
+                <Dish to={`/prato/${id}`}>
+                    <img src={ image } alt="Foto do Prato" />
 
-                            <p>
-                                {data.description}
-                            </p>
+                    <h1>{ name } &gt;</h1>
+                    <p>{ desc }</p>
+                    <span>R$ { handlePriceFormat(price) }</span>
+                </Dish>
 
-                            <span className='price'>
-                                R$ {
-                                    data.price.toLocaleString('pt-BR', {
-                                        minimumFractionDigits: 2,
-                                        maximumFractionDigits: 2
-                                    })}
-                            </span>
-
-                            <Action>
-                                <QuantityProducts
-                                    dish_id={data.id}
-                                />
-                            </Action>
-                        </>
+                { user.role === 'user' &&
+                    <Buttons>
+                        <Stepper id={id} />
+                        <Button title="incluir" onClick={addToCard} isActive />
+                    </Buttons>
                 }
-            </Content>
+            </Section>
         </Container>
     )
 }

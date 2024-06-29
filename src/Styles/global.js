@@ -1,60 +1,60 @@
 import { createGlobalStyle } from "styled-components";
 
-export default createGlobalStyle`
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: 'Roboto', sans-serif;
-};
-:root {
-    font-size: 62.5%;
-    
-    -webkit-font-smoothing: antialiased;
-    user-select: none;
-};
-body {
-    background-color: ${({ theme }) => theme.COLORS.DARK_1000};
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-
-};
-
-body, input, textarea {
-    font-size: clamp(1.4rem, 4vw, 1.8rem);
-    outline: none;
-}
-
-a {
-    text-decoration: none;
-}
-
-button, a {
-    cursor: pointer;
-
-    transition: filter 0.2s;
-
-    &:hover {
-        filter: brightness(0.9);
+export const GlobalStyles = createGlobalStyle`
+    * {
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
     }
-}
 
-h1, h2, h3, h4, h5, h6{
-    font-family: 'Poppins', sans-serif;
-}
+    :root {
+        font-size: 62.5%;
+    }
 
-::-webkit-scrollbar-track{
-    background: ${({ theme }) => theme.COLORS.DARK_1000};
-}
+    body {
+        color: ${({ theme }) => theme.COLORS.LIGHT_300};
+        font-family: "Roboto", sans-serif;
+        
+        background-color: ${({ theme }) => theme.COLORS.DARK_400};
 
-::-webkit-scrollbar{
-    width: 0.6rem;
+        &::-webkit-scrollbar {
+            width: 6px;
+        }
 
-    background: ${({ theme }) => theme.COLORS.DARK_1000};
-}
+        &::-webkit-scrollbar-thumb {
+            border-radius: 100px;
+            background-color: ${({ theme }) => theme.COLORS.DARK_1000};
+        }
+    }
 
-::-webkit-scrollbar-thumb{
-    border-radius: 1rem;
+    .no-scroll {
+        overflow-y: hidden;
+    }
 
-    background: ${({ theme }) => theme.COLORS.CAKE_200};
-}
-`;
+    input {
+        width: 100%;
+        max-width: 34.4rem;
+
+        font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
+
+        padding: 16px 14px;
+
+        border: none;
+        border-radius: 5px;
+        outline: none;
+
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+        background-color: ${({ theme }) => theme.COLORS.DARK_900};
+        
+        &::placeholder {
+            color: ${({ theme }) => theme.COLORS.LIGHT_500};
+        }
+    }
+
+    button {
+        background: none;
+        border: none;
+
+        cursor: pointer;
+    }
+`

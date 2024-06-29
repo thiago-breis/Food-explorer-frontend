@@ -1,86 +1,72 @@
-import { useState } from 'react'
-import { Link } from 'react-router-dom'
-import { RiEyeOffLine, RiEyeLine } from 'react-icons/ri'
+import { Input } from "../../components/Input"
+import { Button } from "../../components/Button"
 
-import { useAuth } from '../../hooks/auth'
+import { Container, Title, Form, Wrapper } from "./styles.js"
+import { Link } from "react-router-dom"
 
-import { Container, Form } from './styles'
+import { useState } from "react"
+import { useAuth } from "../../hooks/auth.jsx"
 
-import { Button } from './../../components/Button'
-import { Input } from '../../components/Input'
+function Signin() {
+    const [email, setEmail] = useState("")
+    const [password, setPassword] = useState("")
 
-import LogoFoodExplore from '../../assets/LogoFoodExplore.svg'
-
-export function SignIn() {
-    const [email, setEmail] = useState('')
-    const [password, setPassword] = useState('')
-    const [showPassword, setShowPassword] = useState(false)
-    
-    const { signIn, loading } = useAuth()
+    const { signIn } = useAuth()
 
     function handleSignIn() {
         signIn({ email, password })
     }
 
-    function handleKeyDown(e) {
-        if (e.key === 'Enter') {
-            handleSignIn()
-        }
-    }
-
-    function handleTogglePassword() {
-        setShowPassword(!showPassword)
-    }
-
     return (
         <Container>
-            <img src={LogoFoodExplore} alt='Logo do restaurante fictício Food Explore, este logo tem um losango na cor azul-escuro e ao lago escrito Food Explore na cor branca.' />
+            <div>
+                <Title>
+                    <svg width="50" height="48" viewBox="0 0 26 31" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M13 0.744263L25.9904 8.24426V23.2443L13 30.7443L0.00961876 23.2443V8.24426L13 0.744263Z" fill="#065E7C" />
+                    </svg>
 
-            <Form autoComplete='off'>
-                <fieldset>
+                    <h1>food explorer</h1>
+                </Title>
 
-                    <legend>Faça login</legend>
+                <Form>
+                    <h1>Faça login</h1>
 
-                    <div className='information'>
-                        <label htmlFor='email'>Email</label>
-
-                        <Input
-                            id='email'
-                            type='text'
-                            placeholder='exemplo@exemplo.com.br'
+                    <Wrapper>
+                        <label htmlFor="user-email">Email</label>
+                        <Input 
+                            id="user-email" 
+                            type="email" 
+                            placeholder="Exemplo: exemplo@exemplo.com.br"
                             onChange={e => setEmail(e.target.value)}
+                            required 
                         />
-                    </div>
+                    </Wrapper>
 
-                    <div className='information'>
-                        <label htmlFor='password'>Senha</label>
+                    <Wrapper>
+                        <label htmlFor="dish-password">Senha</label>
+                        <Input
+                            id="dish-password" 
+                            type="password" 
+                            placeholder="No mínimo 6 caracteres" 
+                            onChange={e => setPassword(e.target.value)}
+                            required 
+                        />
+                    </Wrapper>
 
-                        <div>
-                            <Input
-                                id='password'
-                                type={showPassword ? 'text' : 'password'}
-                                placeholder='No mínimo 6 caracteres'
-                                onChange={e => setPassword(e.target.value)}
-                                onKeyDown={handleKeyDown}
-                            />
-
-                            <span onClick={handleTogglePassword}>
-                                {showPassword ? <RiEyeOffLine size={22} />: <RiEyeLine size={22} /> }
-                            </span>
-                        </div>
-                    </div>
-
-                    <Button
-                        title={loading ? 'Entrando' : 'Entrar'}
+                    <Button 
+                        type="submit" 
+                        title="Entrar" 
                         onClick={handleSignIn}
-                        disabled={loading}
+                        isActive
                     />
-                </fieldset>
 
-                <Link to='/register'>
-                    Criar uma conta
-                </Link>
-            </Form>
+                    <Link to="/cadastrar">
+                        Criar uma conta
+                    </Link>
+                </Form>
+            </div>
         </Container>
     )
 }
+
+export default Signin

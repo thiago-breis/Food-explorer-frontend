@@ -1,38 +1,57 @@
 export default {
     COLORS: {
-        CAKE_200: '#065E7C',
-        CAKE_100: '#82F3FF',
-
-        CARROT_100: '#FBA94C',
+        LIGHT_100: "#FFFFFF",
+        LIGHT_200: "#FFFAF1",
+        LIGHT_300: "#E1E1E6",
+        LIGHT_400: "#C4C4CC",
+        LIGHT_500: "#7C7C8A",
+        LIGHT_600: "#76797B",
+        LIGHT_700: "#4D585E",
         
-        DARK_1000: '#000204',
-        DARK_900: '#000405',
-        DARK_800: '#00070A',
-        DARK_700: '#000A0F',
-        DARK_600: '#000C12',
-        DARK_500: '#00111A',
-        DARK_400: '#001119',
-        DARK_300: '#0D161B',
-        DARK_200: '#0D1D25',
-        DARK_100: '#192227',
+        DARK_100: "#000405",
+        DARK_200: "#00070A",
+        DARK_300: "#000204",
+        DARK_400: "#000A0F",
+        DARK_500: "#000C12",
+        DARK_600: "#00111A",
+        DARK_700: "#001119",
+        DARK_800: "#0D161B",
+        DARK_900: "#0D1D25",
+        DARK_1000: "#192227",
 
-        GRADIENTS_300: 'linear-gradient(180deg, #091E26 0%, #00131C 100%)',
-        GRADIENTS_200: 'linear-gradient(90deg, #000204 0%, #000A0F 100%)',
-        GRADIENTS_100: 'linear-gradient(90deg, #000204 0%, #00131C 100%)',
+        GRADIENT_100: "#000a0f45",
+        GRADIENT_200: "#091E26",
 
-        LIGHT_700: '#4D585E',
-        LIGHT_600: '#76797B',
-        LIGHT_500: '#7C7C8A',
-        LIGHT_400: '#C4C4CC',
-        LIGHT_300: '#E1E1E6',
-        LIGHT_200: '#FFFAF1',
-        LIGHT_100: '#FFFFFF',
+        TOMATO_100: "#750310",
+        TOMATO_200: "#92000E",
+        TOMATO_300: "#AB222E",
+        TOMATO_400: "#AB4D55",
 
-        MINT_100: '#04D361',
+        CARROT_100: "#FBA94C",
 
-        TOMATO_400: '#750310',
-        TOMATO_300: '#92000E',
-        TOMATO_200: '#AB222E',
-        TOMATO_100: '#AB4D55',
+        MINT_100: "#04D361",
+
+        CAKE_100: "#065E7C",
+        CAKE_200: "#82F3FF"
+    },
+    
+    FONTS: {
+        POPPINS_100_MEDIUM: "500 1.4rem/2.4rem 'Poppins', sans-serif",
+        POPPINS_200_MEDIUM: "500 2rem/160% 'Poppins', sans-serif",
+        POPPINS_300_REGULAR: "normal 2.4rem/140% 'Poppins', sans-serif",
+        POPPINS_400_MEDIUM: "500 3.2rem/140% 'Poppins', sans-serif",
+        POPPINS_500_MEDIUM: "500 4rem/140% 'Poppins', sans-serif",
+        POPPINS_300_BOLD: "bold 2.4rem/140% 'Poppins', sans-serif",
+
+        ROBOTO_100_REGULAR: "normal 1.2rem/160% 'Roboto', sans-serif",
+        ROBOTO_200_REGULAR: "normal 1.4rem/160% 'Roboto', sans-serif",
+        ROBOTO_300_REGULAR: "normal 1.6rem/100% 'Roboto', sans-serif",
+        ROBOTO_600_REGULAR: "normal 3.2rem/160% 'Roboto', sans-serif",
+        ROBOTO_300_SPACED: "normal 1.6rem/160% 'Roboto', sans-serif",
+        ROBOTO_200_BOLD: "bold 1.4rem/160% 'Roboto', sans-serif",
+        ROBOTO_400_BOLD: "bold 2rem/160% 'Roboto', sans-serif",
+        ROBOTO_500_BOLD: "bold 2.4rem 'Roboto', sans-serif",
+        ROBOTO_700_BOLD: "bold 4.2rem 'Roboto', sans-serif"
+
     }
-};
+}

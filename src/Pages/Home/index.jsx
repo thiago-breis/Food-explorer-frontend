@@ -1,136 +1,118 @@
-import { useState, useEffect } from 'react'
-import { SwiperSlide } from 'swiper/react'
+import SideBar from "../SideBar"
 
-import { Container, Content, Banner, Dishes } from './styles'
+import { NavBar } from "../../components/NavBar"
+import { Section } from "../../components/Section"
+import { Card } from "../../components/Card"
+import { Footer } from "../../components/Footer"
 
-import { Header } from '../../components/Header'
-import { Section } from '../../components/Section'
-import { Footer } from './../../components/Footer'
-import { Carousel } from './../../components/Carousel'
-import { Card } from './../../components/Card'
+import bannerImg from "../../assets/img/banner-img.png"
+import bannerImgMobile from "../../assets/img/banner-img-mobile.png"
+import dishImage from "../../assets/img/group.png"
 
-import { api } from '../../services/api'
+import { Main, Banner, Text } from "./styles.js"
 
-import Food from '../../assets/foods.png'
+import { useEffect, useState } from "react"
+import { api } from "../../services/api"
 
+function Home() {
+  const [menuIsOpen, setMenuIsOpen] = useState(false)
 
-export function Home() {
-    const settings = {
-        navigation: true,
-        loop: true,
-        breakpoints: {
-          640: {
-            slidesPerView: 1,
-            spaceBetween: 20
-          },
-          768: {
-            slidesPerView: 2,
-            spaceBetween: 30
-          },
-          1024: {
-            slidesPerView: 3,
-            spaceBetween: 40
-          }
-        }
-      }
+  const [dishes, setDishes] = useState([])
+  const [search, setSearch] = useState("")
+  
+  useEffect(() => {
+    const fetchDish = async () => {
+      await api.get(`/dish?search=${search}`).then(res => setDishes(res.data))
+    }
 
-    const [dishes, setDishes] = useState([])
-    const [search, setSearch] = useState('')
+    fetchDish()
+  }, [search])
 
-    useEffect(() => {
-        async function fetchDishes() {
-            const response = await api.get(`/dishes?title=${search}`)
-            setDishes(response.data.dishesWithIngredient)
-        }
+  useEffect(() => {
+    window.scrollTo(0, 0)
+  }, [])
 
-        fetchDishes()
-    }, [search])
+  return (
+    <>
+      <SideBar
+        setSearch={setSearch}
+        menuIsOpen={menuIsOpen}
+        setMenuIsOpen={setMenuIsOpen}
+      />
 
-    return (
-        <Container>
-            <Header search={setSearch}/>
+      <NavBar
+        isClose={true}
+        onTargetMenu={() => setMenuIsOpen(true)}
+        setSearch={setSearch}
+      />
 
-            <Content>
-                <Banner>
-                    <div className='card'>
-                    <img src={Food} alt='Biscoitos recheados e coloridos com frutinhas vermelhas e folhas caindo ao seu redor.' />
+      <Main>
+        <Banner>
+          <div id="banner-content">
+            <img className="desktopImage" src={bannerImg} alt="Imagem do banner" />
+            <img className="mobileImage" src={bannerImgMobile} alt="Imagem do banner" />
 
-                        <div className='title'>
-                            <h1>Sabores inigualáveis</h1>
+            <Text>
+              <h2>Sabores inigualáveis</h2>
+              <p>Sinta o cuidado do preparo com ingredientes selecionados.</p>
+            </Text>
+          </div>
+        </Banner>
 
-                            <span>Sinta o cuidado do preparo com ingredientes selecionados</span>
-                        </div>
-                    </div>
-                </Banner>
+        <div id="section-content">
+          <Section title="Refeições">
+            {
+              dishes && dishes.map(dish => {
+                return dish.category == "snack" &&
+                  <Card
+                    key={String(dish.id)}
+                    id={String(dish.id)}
+                    image={dish.image ? `${api.defaults.baseURL}/files/${dish.image}` : dishImage}
+                    name={dish.title}
+                    desc={dish.description}
+                    price={dish.price}
+                  />
+              })
+            }
+          </Section>
 
-                <Dishes>
-                    <Section
-                        title='Refeições'
-                    />
-                    {
-                        dishes.filter(dish => dish.category == 'snack').length > 0 &&
-                        <Carousel settings={settings}>
-                            {
-                                dishes.filter(dish => dish.category == 'snack').map(dish => (
-                                    <SwiperSlide
-                                        key={String(dish.id)}
-                                    >
-                                        <Card
-                                            data={dish}
-                                        />
-                                    </SwiperSlide>
-                                ))
-                            }
+          <Section title="Sobremesas">
+            {
+              dishes && dishes.map(dish => {
+                return dish.category == "dessert" &&
+                  <Card
+                    key={String(dish.id)}
+                    id={String(dish.id)}
+                    image={dish.image ? `${api.defaults.baseURL}/files/${dish.image}` : dishImage}
+                    name={dish.title}
+                    desc={dish.description}
+                    price={dish.price}
+                  />
+              })
+            }
+          </Section>
 
-                        </Carousel>
-                    }
+          <Section title="Bebidas">
+            {
+              dishes && dishes.map(dish => {
+                return dish.category == "drink" &&
+                  <Card
+                    key={String(dish.id)}
+                    id={String(dish.id)}
+                    image={dish.image ? `${api.defaults.baseURL}/files/${dish.image}` : dishImage}
+                    name={dish.title}
+                    desc={dish.description}
+                    price={dish.price}
+                  />
+              })
+            }
+          </Section>
+        </div>
+      </Main>
 
-                    <Section
-                        title='Sobremesas'
-                    />
-                    {
-                        dishes.filter(dish => dish.category == 'dessert').length > 0 &&
-                        <Carousel settings={settings}>
-                            {
-                                dishes.filter(dish => dish.category == 'dessert').map(dish => (
-                                    <SwiperSlide
-                                        key={String(dish.id)}
-                                    >
-                                        <Card
-                                            data={dish}
-                                        />
-                                    </SwiperSlide>
-                                ))
-                            }
-
-                        </Carousel>
-                    }
-
-                    <Section
-                        title='Bebidas'
-                    />
-                    {
-                        dishes.filter(dish => dish.category == 'drink').length > 0 &&
-                        <Carousel settings={settings}>
-                            {
-                                dishes.filter(dish => dish.category == 'drink').map(dish => (
-                                    <SwiperSlide
-                                        key={String(dish.id)}
-                                    >
-                                        <Card
-                                            data={dish}
-                                        />
-                                    </SwiperSlide>
-                                ))
-                            }
-
-                        </Carousel>
-                    }
-                </Dishes>
-
-                <Footer />
-            </Content>
-
-        </Container>
-    )
+      <Footer />
+    </>
+  )
 }
+
+export default Home

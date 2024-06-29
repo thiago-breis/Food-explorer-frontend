@@ -1,78 +1,134 @@
-import styled from 'styled-components'
+import { styled } from "styled-components"
+import { DEVICE_BREAKPOINTS } from "../../utils/deviceBreakpoints"
 
 export const Container = styled.div`
-    max-width: 110.6rem;
-    height: 100vh;
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
 
-    margin: 0 auto;
+        height: 100vh;
 
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 6.4rem;
+        margin-inline: 15.4rem 10.8rem;
 
-    padding: 4rem;
-
-    > img {
-        width: 100%;
-    }
-
-    @media only screen and (min-width: 768px) {
-        flex-direction: row;
+        > div {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            
+            width: 110rem;
+        }
     }
 `
 
-export const Form = styled.form`
+export const Title = styled.div`
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-items: left;
+    align-items: center;
+    gap: 9px;
 
-    max-width: 47.6rem;
-    width: 100%;
-    
-    padding: 2rem;
-    border-radius: 1.6rem;
+    height: fit-content;
+    margin-block: 15.8rem 7.3rem;
 
-    background-color: ${({ theme }) => theme.COLORS.DARK_400};
-    
-    fieldset {
-        border: none;
-        margin-bottom: 3.2rem;
+    > h1 {
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+        font-size: 3.7rem;
+    }
 
-        legend {
-            border: none;
-            text-align: center;
+    > svg {
+        width: 43px;
+        height: 43px;
+    }
+
+    @media (max-width: 320px) {
+        > h1 {
+            font-size: 3rem;
         }
 
-        .information {
-            label {
-                display: inline-block;
-                padding-bottom: .8rem;
-            }
-
-            > div {
-                display: grid;
-                position: relative;
-
-               span {
-                position: absolute;
-                right: .5rem;
-                bottom: 43%;
-
-                background-color: ${({theme})=> theme.COLORS.DARK_200};
-               }
-            }
+        > svg {
+            width: 30px;
+            height: 30px;
         }
     }
 
-    a {
-        text-align: center;
-        color: ${({ theme }) => theme.COLORS.LIGHT_200}
+    @media (min-width: ${DEVICE_BREAKPOINTS.LG}) {
+        gap: 19px;
+        
+        > h1 {
+            font: ${({ theme }) => theme.FONTS.ROBOTO_700_BOLD};
+        }
+
+        > svg {
+            width: 50px;
+            height: 48px;
+        }
     }
 
-    @media only screen and (min-width: 800px) {
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        margin-block: 0 60px;
+    }
+`
+
+export const Form = styled.div`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 32px;
+
+    padding-inline: 64px;
+
+    > h1 {
+        display: none;
+        font: ${({ theme }) => theme.FONTS.POPPINS_400_MEDIUM};
+    }
+
+    > a {
+        text-decoration: none;
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+        font: ${({ theme }) => theme.FONTS.POPPINS_100_MEDIUM};
+    }
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        width: 47.6rem;
+
         padding: 6.4rem;
+
+        background-color: ${({ theme }) => theme.COLORS.DARK_700};
+        border-radius: 16px;
+
+        > h1 {
+            display: block;
+        }
+
+        > button {
+            width: 100%;
+        }
     }
+`
+
+export const Wrapper = styled.div`
+    display: grid;
+    gap: 8px;
+
+    width: 100%;
+
+    > label {
+        font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
+    }
+
+    > div {
+        justify-content: start;
+        border: 1px solid ${({ theme }) => theme.COLORS.LIGHT_100};
+        border-radius: 8px;
+
+        background-color: ${({ theme }) => theme.COLORS.DARK_700};
+
+        input {
+            min-width: 100%;
+            border-radius: 8px;
+
+            background-color: ${({ theme }) => theme.COLORS.DARK_700};
+        }
+    }
+
 `

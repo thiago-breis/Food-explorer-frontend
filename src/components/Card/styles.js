@@ -1,129 +1,134 @@
-import styled from 'styled-components'
+import { styled } from "styled-components"
+import { Link } from "react-router-dom"
+import { DEVICE_BREAKPOINTS } from "../../utils/deviceBreakpoints"
 
-export const Container = styled.div`
-    width: 100%;
+export const Container = styled.li`
+    min-width: 210px;
+    min-height: 292px;
+
+    border-radius: 8px;
+
+    background-color: ${({ theme }) => theme.COLORS.DARK_200};
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        min-width: 304px;
+        max-width: 304px;
+    }
 `
 
-export const Content = styled.div`
-    padding: 2rem;
-
+export const Section = styled.div`
     position: relative;
+    z-index: 0;
 
     display: flex;
+    align-items: center;
+    justify-content: center;
     flex-direction: column;
-    gap: 1.6rem;
-       
+
+    min-height: 29.2rem;
+
+    padding: 24px;
+
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        min-height: 46.2rem;
+        max-height: 46.2rem;
+    }
+`
+
+export const Actions = styled.button`
+    position: absolute;
+    z-index: 1;
+    top: 16px;
+    right: 16px;
+
+    background: none;
+    border: none;
+
+    > svg {
+        font-size: 3rem;
+        color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    }
+
+    > a {
+        text-decoration: none;
+        font-size: 3rem;
+        color: ${({ theme }) => theme.COLORS.LIGHT_300};
+    }
+`
+
+export const Dish = styled(Link)`
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+
     text-align: center;
+    text-decoration: none;
+    color: ${({ theme }) => theme.COLORS.LIGHT_100};
 
-    img {
-        width: clamp(9rem, 15vw, 20rem);
-        height: clamp(9rem, 15vw, 20rem);
+    > img {
+        width: 88px;
+        height: 88px;
+    }
 
-        object-fit: cover;
+    > h1 {
+        font: ${({ theme }) => theme.FONTS.POPPINS_100_MEDIUM};
+        color: ${({ theme }) => theme.COLORS.LIGHT_100};
+    }
 
-        cursor: pointer;
+    > p {
+        display: none;
+    }
 
-        transition: .5s ease-in-out;
+    > span {
+        color: ${({ theme }) => theme.COLORS.CAKE_200};
+        font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
+    }
 
-        border-radius: 50%;
-
-        &:hover {
-            transform: scale(1.09);
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        > img {
+            width: 176px;
+            height: 176px;
         }
-    }
 
-    .addFavorite {
-        position: absolute;
-        right: 0;
-        top: 0;
-        cursor: pointer;
-        
-        transition: 1s ease-in-out;
-
-        &:hover {
-            fill: ${({theme}) => theme.COLORS.TOMATO_400};
+        > h1 {
+            font: ${({ theme }) => theme.FONTS.POPPINS_300_BOLD};
         }
-    }
 
-    .favorite {
-        position: absolute;
-        right: 0;
-        top: 0;
-        cursor: pointer;
-        
-        fill: ${({theme}) => theme.COLORS.TOMATO_400};
-
-        transition: 1s ease;
-
-        &:hover {
-            fill: ${({theme}) => theme.COLORS.LIGHT_200};
-        }
-    }
-
-    .decision{
-        position: absolute;
-        right: 0;
-        top: 0;
-        cursor: pointer;
-        .edit {
-            transition: .5s ease;
-    
-            &:hover {
-                fill: ${({theme}) => theme.COLORS.CAKE_100};
-            }
-        }
-    }
-
-    a {
-        color: ${({theme}) => theme.COLORS.LIGHT_200};
-    }
-
-    h2 {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        cursor: pointer;
-
-        transition: .5s ease;
-
-        font-size: clamp(1.4rem, 5vw, 2.2rem);
-
-        &:hover {
-            color: ${({theme}) => theme.COLORS.CAKE_200};
-        }
-    }
-
-    p {
-       display: none;
-    } 
-
-    .price {
-        font-size: clamp(1.2rem, 5vw, 3.2rem);
-        color: ${({theme}) => theme.COLORS.CAKE_100};
-    } 
-
-    @media only screen and (min-width: 1000px) {
-        p {
+        > p {
             display: block;
-            font-size: 1.4rem;
+            color: ${({ theme }) => theme.COLORS.LIGHT_400};
+            font: ${({ theme }) => theme.FONTS.ROBOTO_200_REGULAR};
+        }
 
-            height: 5rem;
-            overflow: hidden;
+        > span {
+            font: ${({ theme }) => theme.FONTS.ROBOTO_600_REGULAR};
         }
     }
 `
 
-export const Action = styled.span`
+export const Buttons = styled.div`
     display: flex;
-    flex-direction: column;
+    justify-content: center;
     align-items: center;
-    gap: 1.6rem;
+    flex-direction: column;
+    gap: 16px;
 
-    > div {
-        width: 100%;
+    width: 100%;
+
+    margin-top: 12px;
+
+    > button {
+        padding-block: 4px;
     }
 
-    @media only screen and (min-width: 1000px) {
+    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
+        display: flex;
         flex-direction: row;
+        gap: 16px;
+
+        > button {
+            padding-block: 12px;
+        }
     }
 `
