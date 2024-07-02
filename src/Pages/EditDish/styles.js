@@ -1,202 +1,205 @@
-import { styled } from "styled-components"
-import { DEVICE_BREAKPOINTS } from "../../utils/deviceBreakpoints"
-import { Link } from "react-router-dom"
+import {styled} from 'styled-components'
 
-export const Main = styled.section`
-    padding: 16px 32px 53px;
+export const Container = styled.div`
+    max-width:100%;
+    height: 100vh;
 
     display: grid;
-
-    > h1 {
-        font: ${({ theme }) => theme.FONTS.POPPINS_400_MEDIUM};
-        margin-block: 24px 32px;
-    }
-
-    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-        padding: 40px 123px 116px;
-    }
+    grid-template-rows: 10rem auto;
+    grid-template-areas: 
+    'header'
+    'content'
+    'footer';
 `
 
-export const ButtonText = styled(Link)`
-    display: flex;
-    align-items: center;
+export const Content = styled.main`
+    grid-area: content;
 
-    width: fit-content;
+    overflow-y: auto;
 
-    text-decoration: none;
-    color: ${({ theme }) => theme.COLORS.LIGHT_300};
-    font: 500 1.7rem/140% "Poppins", sans-serif;
+    padding: 3rem;
 
-    border: none;
-    background: none;
-
-    > svg {
-        color: ${({ theme }) => theme.COLORS.LIGHT_100};
-        font-size: 2.2rem;
-    }
-    
-    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-        font: ${({ theme }) => theme.FONTS.POPPINS_300_BOLD};
-
-        > svg {
-            font-size: 3rem;
-        }
-    }
 `
 
-export const Form = styled.section`
-    display: grid;
-    gap: 24px;
-
-    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-        gap: 32px;
-
-        grid-template-columns: 1fr 3fr 2fr;
-        grid-template-areas:
-        "img dish category"
-        "ingr ingr price"
-        "desc desc desc"
-        "buttons buttons buttons";
-
-        #image-wrapper {
-            grid-area: img;
-            white-space: nowrap;
-        }
-        
-        #name-wrapper {
-            grid-area: dish;
-        }
-        
-        #category-wrapper {
-            grid-area: category;
-        }
-        
-        #ingredient-wrapper {
-            grid-area: ingr;
-        }
-        
-        #price-wrapper {
-            grid-area: price;
-        }
-        
-        #description-wrapper {
-            grid-area: desc;
-        }
-    }
-    
+export const Dish = styled.div`
+    max-width: 150rem;
+    margin: 0 auto;
 `
 
-export const Wrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-
+export const Form = styled.form`
+    padding-top: 3rem;
     width: 100%;
 
-    > h1 {
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
-        font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
-    }
-
-    > label {
-        margin-bottom: 16px;
-
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
-        font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
-    }
-
-    > input {
-        min-width: 100%;
-        background-color: ${({ theme }) => theme.COLORS.DARK_800};
-
-        border-radius: 8px;
-    }
-
-    input[type="file"] {
-        display: none;
-    }
-
-    > #file-label {
+    fieldset {
         display: flex;
-        align-items: center;
-        gap: 8px;
+        flex-direction: column;
+        grid-template-columns: 1fr 2fr 1fr;
+        gap: 2rem;
 
-        padding: 12px 32px;
-        margin: 0;
-        margin-top: 15px;
-        border-radius: 8px;
-
-        background-color: ${({ theme }) => theme.COLORS.DARK_800};
-        color: ${({ theme }) => theme.COLORS.LIGHT_100};
-        font: ${({ theme }) => theme.FONTS.POPPINS_100_MEDIUM};
-
-        > svg {
-            font-size: 2.7rem;
-        }
-    }
-
-    > select {
-        padding: 16px 14px;
-
-        outline: none;
         border: none;
-        border-radius: 5px;
+
+        label {
+            display: block;
+            margin-bottom: .8rem;
+        }
         
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
-        font: ${({ theme }) => theme.FONTS.ROBOTO_200_REGULAR};
+        .dishImage {
+            input[type='file'] {
+                display: none;
+            }
 
-        background-color: ${({ theme }) => theme.COLORS.DARK_900};
-    }
+            > div {
+                label {
+                    margin-top: .8rem;
+                    width: 100%;
+                    height: 4.8rem;
 
-    > textarea {
-        resize: none;
-        padding: 14px;
+                    padding: 1.6rem 1.4rem;
 
-        outline: none;
-        border: none;
-        border-radius: 8px;
+                    display: flex;
+                    align-items: center;
+                    gap: .8rem;
 
-        color: ${({ theme }) => theme.COLORS.LIGHT_100};
-        font: ${({ theme }) => theme.FONTS.ROBOTO_300_REGULAR};
+                    background-color: ${({ theme }) => theme.COLORS.DARK_200};
 
-        background-color: ${({ theme }) => theme.COLORS.DARK_800};
+                    border: none;
+                    border-radius: .8rem;
+                }
+            }
+        }
+       
+        .dishCategory {
+            display: flex;
+            flex-direction: column;
 
-        &::placeholder {
-            color: ${({ theme }) => theme.COLORS.LIGHT_500};
+            select {
+                width: 100%;
+                height: 4.8rem;
+
+                padding: 1.6rem 1.4rem;
+
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                background-color: ${({ theme }) => theme.COLORS.DARK_200};
+
+                border: none;
+                border-radius: .8rem;
+
+                color: ${({ theme }) => theme.COLORS.LIGHT_400};
+
+                &:focus {
+                    outline: none;
+                }
+            }
+        }
+
+        .newIngredients {
+            display: flex;
+            flex-direction: column;
+
+            .ingredients {
+                display: flex;
+                flex-wrap: wrap;
+                align-content: center;
+                gap: .8rem;
+                
+                width: 100%;
+                height: auto;
+                padding: 0.8rem;
+
+                border-radius: 0.8rem;
+                border: .1rem solid ${({ theme }) => theme.COLORS.DARK_100};
+            }
+        }
+
+        .price {
+            input[type=number]::-webkit-outer-spin-button,
+            input[type=number]::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                margin: 0;
+            }
+
+            input[type=number] {
+                appearance: textfield;
+            }
+        }
+
+        .description {
+            display: flex;
+            flex-direction: column;
+            
+            textarea {
+                height: 20rem;
+
+                resize: none;
+
+                background-color: ${({ theme }) => theme.COLORS.DARK_200};
+
+                color: ${({ theme }) => theme.COLORS.LIGHT_400};
+
+                border: none;
+                border-radius: 0.8rem;
+
+                padding: 1.6rem 1.4rem;
+            }
+        }
+
+        .button {
+            display: flex;
+            justify-content: space-around;
+            gap: 2rem;
+
+            button {
+                &:nth-child(1){
+                    background: none;
+                    border: .2rem dashed ${({ theme }) => theme.COLORS.DARK_100};
+                    padding: 0;
+
+                    transition: .5s all ease;
+
+                    &:hover {
+                        border: none;
+                        background: ${({ theme }) => theme.COLORS.DARK_100};
+                    }
+                }
+            }
         }
     }
-`
 
-export const Section = styled.section`
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 16px;
+    @media only screen and (min-width: 768px) {
+        fieldset {
+            display: grid;
+            grid-template-columns: 1fr 2fr 1fr;
 
-    list-style: none;
+            .dishImage {
+                grid-column: 1;
+            }
 
-    padding: 8px;
-    border-radius: 8px;
+            .dishName {
+                grid-column: 2;
+            }
 
-    background-color: ${({ theme }) => theme.COLORS.DARK_800};
+            .dishCategory {
+                grid-column: 3;
+            }
 
-    @media (max-width: ${DEVICE_BREAKPOINTS.XS}) {
-        justify-content: center;
-    }
-`
+            .newIngredients {
+                grid-column: 1 / span 2;
+            }
+            
+            .description {
+                grid-column: 1 / span 3;
+            }
 
-export const Actions = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 32px;
+            .price {
+                grid-column: 3;
+            }
 
-    width: 100%;
-
-    > button:first-child {
-        background-color: ${({ theme }) => theme.COLORS.DARK_800};
-    }
-
-    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-        grid-area: buttons;
-        justify-content: end;
+            .button {
+                grid-column: 2/ span 2;
+            }
+        }
     }
 `

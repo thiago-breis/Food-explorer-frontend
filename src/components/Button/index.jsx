@@ -1,10 +1,13 @@
-import { Container } from "./styles.js"
+import { Container } from './styles'
 
-export function Button({ title, icon: Icon, isActive=false, type="button", ...rest }) {
+export function Button({ icon: Icon, title, ...rest }) {
     return (
-        <Container type={type} $isActive={isActive} $icon={Icon} {...rest} >
-            {Icon && <Icon size={30} />}
-            <span>{title}</span>
+        <Container
+            type='button'
+            {...rest}
+        >
+            {Icon && <Icon size={21} />}
+            {title}
         </Container>
     )
-}
+};

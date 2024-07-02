@@ -1,14 +1,14 @@
-import { styled } from "styled-components"
+import {styled} from 'styled-components'
 
-export const Container = styled.select`
-    padding: 16px 14px;
+export const Container = styled.section`
+    width: 100%;
 
-    outline: none;
-    border: none;
-    border-radius: 5px;
+    padding: 3rem 0 2rem;
+    
+    > h2{
+        width: 100%;
 
-    color: ${({ theme }) => theme.COLORS.LIGHT_400};
-    font: ${({ theme }) => theme.FONTS.ROBOTO_200_REGULAR};
-
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+        font-weight: 400;
+        font-size:3.2rem;
+    }
 `

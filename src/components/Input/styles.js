@@ -1,20 +1,27 @@
-import { styled } from "styled-components"
+import {styled} from 'styled-components'
 
 export const Container = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
+   display: flex;
+   align-items: center;
+   gap: .8rem;
+   height: 4.8rem;
 
-    border-radius: 5px;
+   margin-bottom: 2rem;
 
-    background-color: ${({ theme }) => theme.COLORS.DARK_900};
+   background-color: ${({ theme }) => theme.COLORS.DARK_200};
+   
+   border-radius: .8rem;
+   
+   overflow: hidden;
+   
+   padding: .8rem;
 
-    > svg {
-        font-size: 2.6rem;
-        
-        margin-left: 14px;
-        border-radius: 5px;
-
-        color: ${({ theme }) => theme.COLORS.LIGHT_400};
-    }
-`
+   input {
+      width: 100%;
+      
+      background: none;
+      border: none;
+      
+      color: ${({ theme }) => theme.COLORS.LIGHT_400};
+   }
+   `

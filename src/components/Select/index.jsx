@@ -1,8 +1,10 @@
-import { Container } from "./styles.js";
+import { Container } from './styles'
 
-export function Select({ children, ...rest }) {
+export function Section({ title, children }) {
     return (
-        <Container {...rest}>
+        <Container>
+            <h2>{title}</h2>
+
             {children}
         </Container>
     )

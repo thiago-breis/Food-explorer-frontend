@@ -1,39 +1,20 @@
-import { styled } from "styled-components"
-import { DEVICE_BREAKPOINTS } from "../../utils/deviceBreakpoints"
+import { styled } from 'styled-components'
 
 export const Container = styled.button`
     display: flex;
-    justify-content: center;
     align-items: center;
-    gap: 8px;
+    justify-content: center;
 
     width: 100%;
-
-    padding-block: ${({ $icon }) => $icon ? "4px" : "12px"};
-
-    border-radius: 5px;
-
-    color: ${({ theme }) => theme.COLORS.LIGHT_100};
-    font: ${({ theme, $icon }) => $icon ? "500 1rem/1.6rem 'Poppins', sans-serif" : theme.FONTS.POPPINS_100_MEDIUM};
+    height: 4.8rem;
+    padding: 1.2rem 3.3rem;
+    gap: 0.8rem;
+    border: 0;
+    border-radius: 0.5rem;
     
-    background-color: ${({ theme, $isActive }) => $isActive ? theme.COLORS.TOMATO_100 : theme.COLORS.TOMATO_400};
+    font-weight: 500;
+    font-size: 1.4rem;
+    color: ${({ theme }) => theme.COLORS.LIGHT_200};;
 
-    &:hover {
-        cursor: pointer;
-        background-color: ${({ theme, $isActive }) => $isActive ? theme.COLORS.TOMATO_200 : ""};
-    }
-    
-    > svg {
-        width: 22px;
-    }
-
-    > span {
-        white-space: nowrap;
-    }
-
-    @media (min-width: ${DEVICE_BREAKPOINTS.XL}) {
-        width: fit-content;
-
-        padding: 12px 24px;
-    }
+    background-color: ${({ theme }) => theme.COLORS.TOMATO_400};
 `
