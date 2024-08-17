@@ -1,12 +1,3 @@
-import { useEffect, useState } from 'react'
-import { Link, useParams, useNavigate } from 'react-router-dom'
-import { RiArrowLeftSLine } from 'react-icons/ri'
-
-import { api } from '../../services/api'
-import { useAuth } from '../../hooks/auth'
-
-import { Container, Content, Dish, Action } from './styles'
-
 import { Header } from './../../components/Header'
 import { Footer } from './../../components/Footer'
 import { ButtonText } from './../../components/ButtonText'

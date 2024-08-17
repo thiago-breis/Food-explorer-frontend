@@ -1,12 +1,4 @@
-import { useState, useEffect } from 'react'
-import { Link } from 'react-router-dom'
-import { RiHeartFill, RiArrowRightSLine, RiEditLine } from 'react-icons/ri'
 
-import { useAuth } from '../../hooks/auth'
-
-import { Container, Content, Action } from './styles'
-
-import { QuantityProducts } from '../QuantityProducts'
 
 export function Card({ data, ...rest }) {
     const { user } = useAuth()

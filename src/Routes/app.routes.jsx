@@ -1,13 +1,13 @@
 import { Route, Routes } from 'react-router-dom'
 
-import { Home } from '../pages/Home'
-import { Details } from '../pages/Details'
+import { Home } from '../Pages/Home'
+import { Details } from '../Pages/Details'
 import { CreateDish } from '../Pages/CreateDish'
-import { EditDish } from '../pages/EditDish'
-import { Profile } from '../pages/Profile'
-import { Favorites } from '../pages/Favorites'
-import { Cart } from '../pages/Cart'
-import { Orders } from '../pages/Orders'
+import { EditDish } from '../Pages/EditDish'
+import { Profile } from '../Pages/Profile'
+import { Favorites } from '../Pages/Favorites'
+import { Cart } from '../Pages/Cart'
+import { Orders } from '../Pages/Orders'
 
 export function AppRoutes() {
     return (

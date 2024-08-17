@@ -1,12 +1,8 @@
-import { useState, useEffect } from 'react'
-
-import { useAuth } from '../../hooks/auth'
-
 import { Container, Content, Table } from './styles'
 
 import { Footer } from '../../components/Footer'
 import { Header } from '../../components/Header'
-import { Section } from '../../components/Section'
+import { Select } from '../../components/Select'
 
 
 export function Orders() {

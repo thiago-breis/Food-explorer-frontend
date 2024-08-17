@@ -2,7 +2,6 @@ import { Container, Content } from './styles'
 
 import { Header } from '../../components/Header'
 import { Footer } from '../../components/Footer'
-import { ItemsCarts } from '../../components/ItemsCarts'
 import { Payment } from '../../components/Payment'
 import { Button } from '../../components/Button'
 

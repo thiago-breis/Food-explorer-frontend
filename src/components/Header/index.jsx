@@ -1,12 +1,3 @@
-import { useState, useEffect } from 'react'
-
-import { Link } from 'react-router-dom'
-import { RiAlignJustify, RiSearchLine, RiCloseLine, RiLoginBoxLine, RiDraftLine, RiAddLine, RiHeartFill } from 'react-icons/ri'
-
-import { useAuth } from '../../hooks/auth'
-
-import { Container } from './styles'
-
 import { Button } from '../Button'
 
 import LogoFoodExplore from '../../assets/LogoFoodExplore.svg'

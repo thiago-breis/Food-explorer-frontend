@@ -1,12 +1,3 @@
-import { useState } from 'react'
-import { RiArrowLeftSLine, RiUser3Line, RiLock2Line, RiEyeOffLine, RiEyeLine, RiCamera3Fill } from 'react-icons/ri'
-import { TfiEmail } from 'react-icons/tfi'
-import { useNavigate } from 'react-router-dom'
-
-import { useAuth } from '../../hooks/auth'
-
-import { Container, Content, Avatar, Form } from './styles'
-
 import { ButtonText } from '../../components/ButtonText'
 import { Input } from '../../components/Input'
 import { Button } from '../../components/Button'

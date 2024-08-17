@@ -1,10 +1,5 @@
-import { useState, useEffect } from 'react'
-import { SwiperSlide } from 'swiper/react'
-
-import { Container, Content, Banner, Dishes } from './styles'
-
 import { Header } from '../../components/Header'
-import { Section } from '../../components/Section'
+import { Select } from '../../components/Select'
 import { Footer } from './../../components/Footer'
 import { Carousel } from './../../components/Carousel'
 import { Card } from './../../components/Card'
